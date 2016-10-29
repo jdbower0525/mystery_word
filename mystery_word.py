@@ -24,7 +24,7 @@ def random_word():
                     hard_list.append(word)
     print("Easy = 4-6 letters, Normal = 6-8 letters, and Hard is more than 8 letters!")
     difficulty = input("Choose a difficulty! (Easy/Normal/Hard) ").lower()
-    if difficulty != "easy" and difficulty != "normal" and difficulty != "hard":
+    if difficulty[0] != "e" and difficulty[0] != "n" and difficulty[0] != "h":
         print("TYPE EASY, NORMAL, OR HARD TO CHOOSE DIFFICULTY")
         main()
     if difficulty[0] == "e":
