@@ -39,7 +39,7 @@ def random_word():
 # def game_start():
 #
 def user_guess(bad_guesses, good_guesses):
-    while len(bad_guesses) < 10:
+    while len(bad_guesses) < 9:
         guess = input("Guess a letter: ").lower()
         if len(guess) == 0:
             print("Guess something idiot...")
@@ -106,7 +106,7 @@ def main():
     good_guesses = []
     bad_guesses = []
     rand_word = random_word()
-    while len(bad_guesses) < 10:
+    while len(bad_guesses) < 9:
         new_guess = user_guess(bad_guesses, good_guesses)
         comparison(new_guess, rand_word, bad_guesses, good_guesses)
         display(rand_word, good_guesses, bad_guesses)
