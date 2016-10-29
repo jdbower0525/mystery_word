@@ -22,22 +22,21 @@ def random_word():
                     normal_list.append(word)
                 elif len(word) > 8:
                     hard_list.append(word)
+    print("Easy = 4-6 letters, Normal = 6-8 letters, and Hard is more than 8 letters!")
     difficulty = input("Choose a difficulty! (Easy/Normal/Hard) ").lower()
     if difficulty != "easy" and difficulty != "normal" and difficulty != "hard":
         print("TYPE EASY, NORMAL, OR HARD TO CHOOSE DIFFICULTY")
         main()
-    if difficulty == "easy":
+    if difficulty[0] == "e":
         rand_word = random.choice(easy_list)
         return rand_word
-    elif difficulty == "normal":
+    elif difficulty[0] == "n":
         rand_word = random.choice(normal_list)
         return rand_word
-    elif difficulty == "hard":
+    elif difficulty[0] == "h":
         rand_word = random.choice(hard_list)
         return rand_word
 
-# def game_start():
-#
 def user_guess(bad_guesses, good_guesses):
     while len(bad_guesses) < 9:
         guess = input("Guess a letter: ").lower()
@@ -63,9 +62,13 @@ def comparison(new_guess, rand_word, bad_guesses, good_guesses):
         bad_guesses.append(new_guess)
         return bad_guesses
 
-def display(rand_word, good_guesses, bad_guesses):
+def display(rand_word, good_guesses, bad_guesses, new_guess):
     clear()
-    print("\nYou have {} guesses left.".format(8 - len(bad_guesses)))
+    if new_guess in rand_word:
+        print("\nYour guess was right!")
+    elif new_guess not in rand_word:
+        print("\nYour guess was wrong!")
+    print("You have {} guesses left.".format(8 - len(bad_guesses)))
     print("Your misses so far have been: \n{}".format(bad_guesses))
     empty_list = []
     for letter in rand_word:
@@ -94,10 +97,10 @@ def loss_condition(rand_word):
     game_reset()
 
 def game_reset():
-    replay = input("Would you like to play again? (Yes/No) ")
-    if replay == 'no':
+    replay = input("Would you like to play again? (Yes/No) ").lower()
+    if replay[0] == 'n':
         exit()
-    elif replay == 'yes':
+    elif replay[0] == 'y':
         main()
     else:
         exit()
@@ -109,7 +112,9 @@ def main():
     while len(bad_guesses) < 9:
         new_guess = user_guess(bad_guesses, good_guesses)
         comparison(new_guess, rand_word, bad_guesses, good_guesses)
-        display(rand_word, good_guesses, bad_guesses)
+        display(rand_word, good_guesses, bad_guesses, new_guess)
         if len(bad_guesses) >= 8:
             loss_condition(rand_word)
-main()
+
+if __name__ == "__main__":
+    main()
