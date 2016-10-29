@@ -9,6 +9,7 @@ def clear():
         os.system('clear')
 
 def random_word():
+    clear()
     easy_list = []
     normal_list = []
     hard_list = []
