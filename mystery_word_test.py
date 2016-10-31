@@ -1,22 +1,37 @@
-from mystery_word import main
+import unittest
+from mystery_word import random_word
+from mystery_word import game_reset
+from mystery_word import loss_condition
 
-def test_even_numbers():
-    assert is_palindrome('toot') == True
 
-def test_odd_numbers():
-    assert is_palindrome('tot') == True
 
-def test_simple_values():
-    assert is_palindrome('stunt nuts') == True
+class TestMysteryWordFunctions(unittest.TestCase):
 
-def test_complete_sentences():
-    assert is_palindrome('Lisa Bonet ate no basil.') == True
+    def test_game_reset(self):
+        user_input_1 = False
+        self.assertRaises(SystemExit, user_input_1)
+        user_input_2 = True
+        self.assertEqual(main(), user_input_2)
 
-def test_complex_sentences():
-    assert is_palindrome('A man, a plan, a cat, a ham, a yak, a yam, a hat, a canal: Panama!') == True
+    def test_loss_condition(self):
+        self.return_value = "random"
+        self.side_effect = list("bcdefgh")
+        mystery_word.main()
+        self.xprint.assert_any_call("The secret word was random")
 
-def test_multiple_sentences():
-    assert is_palindrome('Doc, note, I dissent. A fast never prevents a fatness. I diet on cod.') == True
+    def test_random_word(self):
+       user_diff_choice_one = 'e'
+       user_diff_choice_two = 'm'
+       user_diff_choice_three = 'h'
+       easy = ['easy']
+       medium = ['mediums']
+       hard = ['difficults']
+       random_word_one = random_word()
+       random_word_two = random_word()
+       random_word_three = random_word(user_diff_choice_three, easy, medium, hard)
+       self.assertEqual(random_word_one, 'easy')
+       self.assertEqual(random_word_two, 'mediums')
+       self.assertEqual(random_word_three, 'difficults')
 
-def test_non_palindromes():
-    assert is_palindrome('i am not a palindrome') == False
+if __name__ == '__main__':
+    unittest.main()

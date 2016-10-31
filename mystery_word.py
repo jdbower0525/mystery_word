@@ -9,7 +9,7 @@ def clear():
         os.system('clear')
 
 def random_word():
-    clear()
+    print('')
     easy_list = []
     normal_list = []
     hard_list = []
@@ -42,7 +42,7 @@ def user_guess(bad_guesses, good_guesses):
     while len(bad_guesses) < 9:
         guess = input("Guess a letter: ").lower()
         if len(guess) == 0:
-            print("Guess something idiot...")
+            print("You have to guess SOMETHING!")
             continue
         elif guess in bad_guesses or guess in good_guesses:
             print("You've already guessed that letter!")
@@ -65,12 +65,15 @@ def comparison(new_guess, rand_word, bad_guesses, good_guesses):
 
 def display(rand_word, good_guesses, bad_guesses, new_guess):
     clear()
+    print("\nThe secret word is {} letters long.".format(len(rand_word)))
     if new_guess in rand_word:
         print("\nYour guess was right!")
     elif new_guess not in rand_word:
         print("\nYour guess was wrong!")
+
     print("You have {} guesses left.".format(8 - len(bad_guesses)))
     print("Your misses so far have been: \n{}".format(bad_guesses))
+
     empty_list = []
     for letter in rand_word:
         if letter in good_guesses:
